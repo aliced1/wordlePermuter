@@ -1,13 +1,7 @@
 import { React, useState } from 'react';
 import { TextField, Box } from '@mui/material';
 
-export default function MainField() {
-    const [char1, setChar1] = useState("");
-
-    const handleInput = (event) => {
-        const newValue = event.target.value.toUpperCase();
-        setChar1(newValue);
-    };
+export default function MainField({ char1, handleInput, index }) {
 
     return (
         <Box
@@ -21,9 +15,11 @@ export default function MainField() {
             }}
         >
             <TextField
+                id={`characterId${index}`}
                 fullWidth
                 value={char1}
-                onChange={handleInput}
+                // onChange={handleInput}
+                onKeyUp={handleInput}
                 maxRows={1}
                 minRows={1}
                 // variant='standard'

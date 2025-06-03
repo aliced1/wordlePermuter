@@ -4,9 +4,20 @@ import MainField from "../components/mainField";
 
 
 export default function Permutor() {
+    const [chars, setChars] = useState(["", "", "", "", ""]);
+
+    // Update characters on change and make uppercase
+    const handleInput = (index) => (event) => {
+        const newChars = [...chars];
+        newChars[index] = event.key.toUpperCase();
+        setChars(newChars);
+        if (index < 4) document.getElementById(`characterId${index + 1}`).focus();
+        // console.log('chars:', newChars);
+        // console.log('event.key:', event.key);
+    };
 
     return (
-        <body>
+        <div>
             <h1>Welcome to the perm</h1>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid
@@ -19,7 +30,7 @@ export default function Permutor() {
                         backgroundColor: "#f1f2f3",
                     }}
                 >
-                    <Grid item xs={12}>
+                    <Grid >
                         <Grid
                             container
                             direction="row"
@@ -27,26 +38,20 @@ export default function Permutor() {
                             alignItems="center"
                             sx={{ pt: 10, pb: 10 }}
                         >
-                            <Grid item>
-                                <MainField />
-                            </Grid>
-                            <Grid item>
-                                <MainField />
-                            </Grid>
-                            <Grid item>
-                                <MainField />
-                            </Grid>
-                            <Grid item>
-                                <MainField />
-                            </Grid>
-                            <Grid item>
-                                <MainField />
-                            </Grid>
+                            {chars.map((char, index) => (
+                                <Grid key={index}>
+                                    <MainField
+                                        char1={char}
+                                        handleInput={handleInput(index)}
+                                        index={index}
+                                    />
+                                </Grid>
+                            ))}
                         </Grid>
                     </Grid>
                 </Grid>
             </Box>
-        </body >
+        </div >
     );
 };
 
