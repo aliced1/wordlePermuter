@@ -18,7 +18,7 @@ export default function MainField({ char1, handleInput, index }) {
                 id={`characterId${index}`}
                 fullWidth
                 value={char1}
-                onKeyUp={handleInput}
+                onChange={handleInput}
                 maxRows={1}
                 minRows={1}
                 // variant='standard'
